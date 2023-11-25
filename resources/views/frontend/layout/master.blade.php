@@ -26,6 +26,8 @@
 </head>
 
 <body>
+@include('sweetalert::alert')
+
 <!-- Topbar Start -->
 @include('frontend.layout.header')
 <!-- Topbar End -->

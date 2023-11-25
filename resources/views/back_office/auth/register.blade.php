@@ -12,24 +12,37 @@
 
 
             <div class="panel-body">
-                <form class="form-horizontal m-t-20" action="index.html">
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <input class="form-control input-lg" type="email" required="" placeholder="Email">
-                        </div>
-                    </div>
-
+                <form class="form-horizontal m-t-20" method="post" action="{{route('register')}}">
+                    @csrf
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control input-lg" type="text" required="" placeholder="Username">
+                            <input name="name" class="form-control input-lg" type="text" required="" placeholder="Name">
                         </div>
+
                     </div>
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control input-lg" type="password" required="" placeholder="Password">
+                            <input name="email" class="form-control input-lg" type="email" required="" placeholder="Email">
                         </div>
+
                     </div>
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input name="password" class="form-control input-lg" type="password" required="" placeholder="Password">
+                        </div>
+
+                    </div>
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
                     <div class="form-group ">
                         <div class="col-xs-12">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
     <meta name="author" content="Coderthemes">
-    <link rel="shortcut icon" href="images/favicon_1.ico">
+    <link rel="shortcut icon" href="{{asset('back_office/images/favicon_1.ico')}}">
     <title>Moltran - @yield('title')</title>
 
 
@@ -28,9 +28,10 @@
 
     <link href="{{asset('back_office/css/helper.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('back_office/css/style.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-
+    @stack('admin.style')
     <script src="{{asset('back_office/js/modernizr.min.js')}}"></script>
 
 </head>
@@ -38,6 +39,7 @@
 
 
 <body class="fixed-left">
+@include('sweetalert::alert')
 
 <!-- Begin page -->
 <div id="wrapper">
@@ -67,7 +69,7 @@
                         <h4 class="pull-left page-title">Welcome !</h4>
                         <ol class="breadcrumb pull-right">
                             <li><a href="#">Moltran</a></li>
-                            <li class="active">Dashboard</li>
+                            <li class="active">@yield('title')</li>
                         </ol>
                     </div>
                 </div>
@@ -151,5 +153,12 @@
     });
 </script>
 
+<!-- Examples -->
+<script src="{{asset("back_office/assets/magnific-popup/magnific-popup.js")}}"></script>
+<script src="{{asset("back_office/assets/jquery-datatables-editable/jquery.dataTables.js")}}"></script>
+<script src="{{asset("back_office/assets/datatables/dataTables.bootstrap.js")}}"></script>
+<script src="{{asset("back_office/assets/jquery-datatables-editable/datatables.editable.init.js")}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@stack('admin.script')
 </body>
 </html>

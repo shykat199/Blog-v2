@@ -11,31 +11,20 @@
 
 
             <div class="panel-body">
-                <form class="form-horizontal m-t-20" action="index.html">
-
+                <form class="form-horizontal m-t-20" method="post" action="{{route('login')}}">
+                    @csrf
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control input-lg " type="text" required="" placeholder="Username">
+                            <input name="email" class="form-control input-lg " type="text" required="" placeholder="Username">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control input-lg" type="password" required="" placeholder="Password">
+                            <input name="password" class="form-control input-lg" type="password" required="" placeholder="Password">
                         </div>
                     </div>
 
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <div class="checkbox checkbox-primary">
-                                <input id="checkbox-signup" type="checkbox">
-                                <label for="checkbox-signup">
-                                    Remember me
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
 
                     <div class="form-group text-center m-t-40">
                         <div class="col-xs-12">

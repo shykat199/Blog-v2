@@ -39,6 +39,7 @@
 
 </head>
 <body>
+@include('sweetalert::alert')
 
 
 @yield('auth.content')
