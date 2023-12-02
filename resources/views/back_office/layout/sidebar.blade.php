@@ -38,6 +38,18 @@
                     </ul>
                 </li>
 
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="md md-mail"></i><span> News </span><span class="pull-right">
+                            <i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{route('show-post')}}">All Post</a></li>
+                        <li><a href="{{route('create-post')}}">New Post</a></li>
+                        <li><a href="{{route('show-category')}}">Post Categories</a></li>
+                        <li><a href="{{route('show-tag')}}">Post Tags</a></li>
+                    </ul>
+                </li>
+
+
             </ul>
             <div class="clearfix"></div>
         </div>

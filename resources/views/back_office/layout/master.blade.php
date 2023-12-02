@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +9,15 @@
     <title>Moltran - @yield('title')</title>
 
 
-    <link href="{{asset('back_office/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('back_office/css/bootstrap.min.css')}}" rel="stylesheet"/>
 
 
-    <link href="{{asset('back_office/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('back_office/assets/ionicon/css/ionicons.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('back_office/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('back_office/assets/ionicon/css/ionicons.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('back_office/css/material-design-iconic-font.min.css')}}" rel="stylesheet">
 
 
-    <link href="{{asset('back_office/css/animate.css')}}" rel="stylesheet" />
+    <link href="{{asset('back_office/css/animate.css')}}" rel="stylesheet"/>
 
 
     <link href="{{asset('back_office/css/waves-effect.css')}}" rel="stylesheet">
@@ -26,16 +26,18 @@
     <link href="{{asset('back_office/assets/sweet-alert/sweet-alert.min.css')}}" rel="stylesheet">
 
 
-    <link href="{{asset('back_office/css/helper.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('back_office/css/style.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="{{asset('back_office/css/helper.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('back_office/css/style.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 
     @stack('admin.style')
     <script src="{{asset('back_office/js/modernizr.min.js')}}"></script>
 
 </head>
-
 
 
 <body class="fixed-left">
@@ -52,7 +54,6 @@
     <!-- ========== Left Sidebar Start ========== -->
     @include('back_office.layout.sidebar')
     <!-- Left Sidebar End -->
-
 
 
     <!-- ============================================================== -->
@@ -80,7 +81,7 @@
 
         </div> <!-- content -->
 
-       @include('back_office.layout.footer')
+        @include('back_office.layout.footer')
 
     </div>
     <!-- ============================================================== -->
@@ -90,7 +91,6 @@
 
 </div>
 <!-- END wrapper -->
-
 
 
 <script>
@@ -145,7 +145,7 @@
     /* ==============================================
     Counter Up
     =============================================== */
-    jQuery(document).ready(function($) {
+    jQuery(document).ready(function ($) {
         $('.counter').counterUp({
             delay: 100,
             time: 1200
@@ -158,7 +158,12 @@
 <script src="{{asset("back_office/assets/jquery-datatables-editable/jquery.dataTables.js")}}"></script>
 <script src="{{asset("back_office/assets/datatables/dataTables.bootstrap.js")}}"></script>
 <script src="{{asset("back_office/assets/jquery-datatables-editable/datatables.editable.init.js")}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
+        integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 @stack('admin.script')
 </body>
 </html>
