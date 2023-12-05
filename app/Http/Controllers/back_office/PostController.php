@@ -31,7 +31,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        dd($_POST);
         $fileName = null;
         if ($request->file()) {
             $fileName = Uuid::uuid() . '.' . 'post_image' . '.' . $request->file('image')->getClientOriginalExtension();
