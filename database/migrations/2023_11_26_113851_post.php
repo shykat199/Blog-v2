@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('description');
             $table->text('post_url')->unique();
-            $table->text('featured_image');
+            $table->text('featured_image')->nullable();
             $table->integer('hit_count');
             $table->enum('status',['Pending', 'Wait', 'Active'])->default('Pending');
             $table->timestamps();

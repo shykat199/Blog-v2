@@ -45,9 +45,14 @@ Route::middleware('auth')->group(function () {
     Route::controller(PostController::class)->group(function (){
         Route::get('/show-post','index')->name('show-post');
         Route::get('/create-post','create')->name('create-post');
-        Route::get('/edit-post/{id}','edit')->name('edit-post');
+        Route::post('/store-post','store')->name('store-post');
+        Route::get('/edit-post/{slug}','edit')->name('edit-post');
         Route::post('/update-post/{id}','update')->name('update-post');
-        Route::get('/delete-post/{id}','delete')->name('delete-post');
+        Route::get('/delete-post','delete')->name('delete-post');
+
+        Route::get('/get-post-tag','postTag')->name('tag-post');
+        Route::get('/post-tag-data','postTagData')->name('post-tag-data');
+        Route::get('/get-sub-category','getSubCategory')->name('post-sub-category');
 
     });
 
@@ -64,7 +69,6 @@ Route::middleware('auth')->group(function () {
     Route::controller(TagController::class)->group(function (){
 
         Route::get('/show-tag','index')->name('show-tag');
-//        Route::get('/create-tag','create')->name('create-tag');
         Route::post('/store-tag','store')->name('store-tag');
         Route::get('/edit-tag/{slug}','edit')->name('edit-tag');
         Route::post('/update-tag/{id}','update')->name('update-tag');

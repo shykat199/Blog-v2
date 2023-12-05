@@ -1,5 +1,5 @@
 @extends('back_office.layout.master')
-@section('title','All Category')
+@section('title','All Tags')
 @push('admin.style')
 
 @endpush
