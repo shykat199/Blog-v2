@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/get-profile','profile')->name('admin.profile');
+        Route::post('/update-profile','updateProfile')->name('profile-update');
+        Route::post('/update-password','updatePassword')->name('password-update');
     });
 
     Route::controller(RoleController::class)->group(function (){

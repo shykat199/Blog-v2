@@ -81,7 +81,7 @@
                         <option value="Pending"{{isset($posts)?($posts->status == 'Pending'?'SELECTED':''):''}}>
                             Pending
                         </option>
-                        <option value="Wait"{{isset($posts)?($posts->status == 'Wait'?'SELECTED':''):''}}>Reject
+                        <option value="Wait"{{isset($posts)?($posts->status == 'Inactive'?'SELECTED':''):''}}>Inactive
                         </option>
                     </select>
 

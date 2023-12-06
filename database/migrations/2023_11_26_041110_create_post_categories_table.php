@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('post_categories', function (Blueprint $table) {
             $table->id()->index();
             $table->integer('parent_id')->index();
-            $table->integer('subCategory_id')->index();
             $table->string('name')->unique();
             $table->string('slug');
             $table->timestamps();
