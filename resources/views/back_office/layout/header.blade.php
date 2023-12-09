@@ -27,7 +27,7 @@
 
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img
-                                src="{{asset('back_office/images/avatar-1.jpg')}}" alt="user-img" class="img-circle"> </a>
+                            <img src="{{ isset(\Illuminate\Support\Facades\Auth::user()->user_image)? asset('storage/images/user/'.\Illuminate\Support\Facades\Auth::user()->user_image):asset('back_office/images/avatar-1.jpg')}}" alt="" class="thumb-md img-circle">
                         <ul class="dropdown-menu">
                             <li><a href="{{route('admin.profile')}}"><i class="md md-face-unlock"></i> Profile</a></li>
                             <li><a href="{{route('log-out')}}"><i class="md md-settings-power"></i> Logout</a></li>

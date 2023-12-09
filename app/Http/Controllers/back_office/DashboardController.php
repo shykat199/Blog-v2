@@ -4,9 +4,12 @@ namespace App\Http\Controllers\back_office;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\Concerns\Has;
 
 class DashboardController extends Controller
@@ -18,19 +21,58 @@ class DashboardController extends Controller
 
     public function profile()
     {
-        return view('back_office.profile.index');
+        $data['userInfo'] = User::find(Auth::user()->id);
+        return view('back_office.profile.index', $data);
     }
 
     public function updateProfile(Request $request)
     {
-        $findUser = User::find(Auth::user()->id);
-        if ($findUser) {
-            $updateProfile = $findUser->update([
-                'name' => $request->post('name')
-            ]);
 
-            if ($updateProfile) {
-                toast('User name updated successfully', 'success');
+        $findUser = User::find(Auth::user()->id);
+        $fileName = null;
+        $userData = [];
+
+        if ($findUser) {
+
+            if ($findUser->user_image) {
+                if ($request->file('user_image')) {
+                    $fileName = Uuid::uuid() . '.' . 'users-image' . '.' . $request->file('user_image')->getClientOriginalExtension();
+                    $file = Storage::put('/public/images/user/' . $fileName, file_get_contents($request->file('user_image')));
+                    $dltVideo = Storage::delete('public/images/user/' . $findUser->user_image);
+
+                    $userData = [
+                        'name' => $request->post('name'),
+                        'user_image' => $fileName,
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ];
+                } else {
+                    $userData = [
+                        'name' => $request->post('name'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ];
+                }
+            } else {
+                if ($request->file('user_image')) {
+
+                    $fileName = Uuid::uuid() . '.' . 'users-image' . '.' . $request->file('user_image')->getClientOriginalExtension();
+                    $file = Storage::put('/public/images/user/' . $fileName, file_get_contents($request->file('user_image')));
+                } else {
+                    $userData = [
+                        'name' => $request->post('name'),
+                        'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ];
+                }
+                $userData = [
+                    'name' => $request->post('name'),
+                    'user_image' => $fileName,
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ];
+            }
+
+            $updateProfilePhoto = $findUser->where('id', Auth::user()->id)->update($userData);
+
+            if ($updateProfilePhoto) {
+                toast('Profile updated successfully', 'success');
                 return redirect()->back();
             } else {
                 toast('Something wrong try again.', 'error');

@@ -2,7 +2,9 @@
 @section('title','Profile')
 @push('admin.style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+          integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 @endpush
 @section('dashboard.content')
 
@@ -13,7 +15,7 @@
                      style="background-image:url('{{asset('back_office/images/big/bg.jpg')}}')">
                     <div class="bg-picture-overlay"></div>
                     <div class="profile-info-name">
-                        <img src="{{asset('back_office/images/avatar-1.jpg')}}"
+                        <img src="{{ isset($userInfo->user_image)? asset('storage/images/user/'.$userInfo->user_image):asset('back_office/images/avatar-1.jpg')}}"
                              class="thumb-lg img-circle img-thumbnail" alt="profile-image">
                         <h3 class="text-white">{{\Illuminate\Support\Facades\Auth::user()->name}}</h3>
                     </div>
@@ -55,7 +57,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post"
-                                              action="{{route('profile-update')}}" novalidate="novalidate">
+                                              action="{{route('profile-update')}}" novalidate="novalidate"
+                                              enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group ">
                                                 <label for="cname" class="control-label col-lg-2">User Name</label>
@@ -73,6 +76,19 @@
                                                            required="" aria-required="true" readonly>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group ">
+                                                <label for="cname" class="control-label col-lg-2">User Image</label>
+                                                <div class="col-lg-10">
+
+                                                    <input type="file" name="user_image" class="dropify"
+                                                           data-height="150"
+                                                           data-default-file="{{ isset($userInfo->user_image)? asset('storage/images/user/'.$userInfo->user_image):asset('back_office/images/avatar-1.jpg')}}"
+                                                           data-allowed-file-extensions="jpeg png jpg"
+                                                           data-max-file-size-preview="3M"/>
+                                                </div>
+
+                                            </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
                                                     <button class="btn btn-success waves-effect waves-light"
@@ -80,6 +96,8 @@
                                                     </button>
                                                 </div>
                                             </div>
+
+
                                         </form>
                                     </div>
                                 </div>
@@ -137,7 +155,9 @@
 
 @push('admin.script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
+            integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
 
         $(document).on('click', '.updatePassword', function () {
@@ -168,5 +188,16 @@
             });
         })
 
+    </script>
+    <script>
+
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a image here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong happended.'
+            }
+        });
     </script>
 @endpush
