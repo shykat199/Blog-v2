@@ -14,7 +14,7 @@ class Post extends Model
     protected $table='posts';
 
     protected $fillable=[
-        'sub_cat_id','user_id','hit_count','cat_id','title','description','post_url','featured_image','status'
+        'sub_cat_id','user_id','hit_count','cat_id','title','description','post_url','featured_image','is_featured','status'
     ];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\HasOne

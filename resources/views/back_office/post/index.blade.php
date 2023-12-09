@@ -27,6 +27,7 @@
                                     <th>Thumb</th>
                                     <th>Details</th>
                                     <th>Category</th>
+                                    <th>Is Featured</th>
                                     <th>Hits</th>
                                     <th>Post Date</th>
                                     <th>Status</th>
@@ -43,6 +44,7 @@
                                             </td>
                                             <td>{{\Illuminate\Support\Str::limit($posts->title,'120','...')}}</td>
                                             <td>{{$posts->category->name}}</td>
+                                            <td>{{$posts->is_featured == 1 ? 'Featured':''}}</td>
                                             <td>{{$posts->hit_count}}</td>
                                             <td>{{\Carbon\Carbon::parse($posts->created_at)->format('Y-m-d g:i A')}}</td>
                                             <td>{{$posts->status}}</td>

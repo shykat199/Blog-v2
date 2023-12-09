@@ -34,7 +34,6 @@ class PostCategoryController extends Controller
 
             $storeCategory = PostCategory::create([
                 'parent_id' => $request->post('category_id') != null && !empty($request->post('category_id')) ? $request->post('category_id') : 0,
-                'subCategory_id' => $request->post('sub_category_id') != null && !empty($request->post('sub_category_id')) ? $request->post('sub_category_id') : 0,
                 'name' => $request->post('name') != null && !empty($request->post('name')) ? $request->post('name') : '',
                 'slug' => $request->post('categorySlug') != null && !empty($request->post('categorySlug')) ? $request->post('categorySlug') : '',
             ]);

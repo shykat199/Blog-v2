@@ -1,9 +1,9 @@
 @push('admin.style')
     <link href="{{asset('back_office/assets/select2/select2.css')}}" rel="stylesheet" type="text/css"/>
-    {{--    <link href="{{asset('back_office/css/dropify.css')}}" rel="stylesheet" type="text/css"/>--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-          integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{{--    <link href="{{asset('back_office/css/dropify.css')}}" rel="stylesheet" type="text/css"/>--}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+              integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
 @endpush
 
 <form action="{{isset($posts)?route('update-post',$posts->post_url):route('store-post')}}" method="post"
@@ -84,12 +84,28 @@
                         <option value="Wait"{{isset($posts)?($posts->status == 'Inactive'?'SELECTED':''):''}}>Inactive
                         </option>
                     </select>
-
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="checkbox checkbox-primary">
+                        <input id="checkbox3" name="is_featured" type="checkbox" {{isset($posts) && $posts->is_featured == 1?'checked':''}}>
+                        <label for="checkbox3">
+                            Is Featured Post
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -111,7 +127,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label for="image">Featured Image</label>
-                    <input type="file" name="image" class="dropify" data-height="150"
+                    <input type="file" name="image" class="dropify" data-height="168"
                            data-default-file="{{ isset($posts)? asset('storage/images/post/'.$posts->featured_image):''}}"
                            data-allowed-file-extensions="jpeg png jpg" data-max-file-size-preview="3M"/>
                 </div>
@@ -120,28 +136,31 @@
     </div>
 
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body" style="padding: 5px">
-                <button type="submit" class="btn btn-block btn-lg btn-primary waves-effect waves-light">
-                    {{isset($posts)?'Update Post':'Submit Post'}}
-
-                </button>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding: 5px">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary waves-effect waves-light">
+                        {{isset($posts)?'Update Post':'Submit Post'}}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
 
 </form>
 
 @push('admin.script')
 
     <script src="{{asset('back_office/assets/select2/select2.min.js')}}" type="text/javascript"></script>
-    {{--    <script src="{{asset('back_office/js/dropify.js')}}" type="text/javascript"></script>--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
-            integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"
-            integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('back_office/js/jqueryValidate.js')}}" type="text/javascript"></script>
+    <script src="{{asset('back_office/js/dropify.js')}}" type="text/javascript"></script>
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"--}}
+    {{--            integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="--}}
+    {{--            crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"--}}
+    {{--            integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A=="--}}
+    {{--            crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 
     <script>
         CKEDITOR.replace('editor');

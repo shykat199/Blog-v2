@@ -23,14 +23,17 @@ class PostController extends Controller
         return view('back_office.post.index', $data);
     }
 
-    public function create()
-    {
-        $data['allCategories'] = PostCategory::where('parent_id', '=', 0)->get();
-        return view('back_office.post.create', $data);
-    }
-
     public function store(Request $request)
     {
+        $checkPost = Post::where('post_url',$request->post('post_url'))->first();
+
+        if (!empty($checkPost)){
+
+            toast('Post is already exist wjith same title','error');
+            return redirect()->back();
+        }
+
+
         $fileName = null;
         if ($request->file()) {
             $fileName = Uuid::uuid() . '.' . 'post_image' . '.' . $request->file('image')->getClientOriginalExtension();
@@ -45,6 +48,7 @@ class PostController extends Controller
             'title' => $request->post('title') !== null ? $request->post('title') : '',
             'status' => $request->post('status') !== null ? $request->post('status') : 'Pending',
             'featured_image' => $request->file('image') !== null ? $fileName : null,
+            'is_featured' => $request->post('is_featured') == 'on' ? 1 : 0,
             'hit_count' => 0,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -69,6 +73,12 @@ class PostController extends Controller
             toast('Something wrong try again.', 'error');
             return redirect()->back();
         }
+    }
+
+    public function create()
+    {
+        $data['allCategories'] = PostCategory::where('parent_id', '=', 0)->get();
+        return view('back_office.post.create', $data);
     }
 
     public function edit($slug)
@@ -100,6 +110,7 @@ class PostController extends Controller
                 'description' => $request->post('description') !== null ? $request->post('description') : '',
                 'post_url' => $request->post('post_url') !== null ? $request->post('post_url') : '',
                 'title' => $request->post('title') !== null ? $request->post('title') : '',
+                'is_featured' => $request->post('is_featured') == 'on' ? 1 : 0,
                 'status' => $request->post('status') !== null ? $request->post('status') : 'Pending',
                 'featured_image' => $request->file('image') !== null ? $fileName : $getPostDetails->featured_image,
                 'hit_count' => 0,

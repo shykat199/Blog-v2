@@ -9,7 +9,7 @@ class PostCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['parent_id', 'subCategory_id', 'name', 'slug'];
+    protected $fillable = ['parent_id', 'name', 'slug'];
     protected $table = 'post_categories';
 
     public function subCategory(): \Illuminate\Database\Eloquent\Relations\HasMany
