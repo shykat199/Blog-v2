@@ -51,7 +51,7 @@ return [
     | alwaysLoadJs = true  & neverLoadJs = true  => js will not be loaded
     | alwaysLoadJs = true  & neverLoadJs = false => js will be loaded
     | alwaysLoadJs = false & neverLoadJs = false => js will be loaded when
-    | you set alert/toast by using the facade/helper functions.
+    | you set alert/toast by using the facade/Helper functions.
     */
 
     'neverLoadJS' => env('SWEET_ALERT_NEVER_LOAD_JS', false),
@@ -62,7 +62,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is for the all Modal windows.
-    | For specific modal just use the autoClose() helper method.
+    | For specific modal just use the autoClose() Helper method.
     |
     */
 
@@ -77,7 +77,7 @@ return [
     | Can be in px or %.
     | The default width is 32rem.
     | This is for the all Modal windows.
-    | for particular modal just use the width() helper method.
+    | for particular modal just use the width() Helper method.
     */
 
     'width' => env('SWEET_ALERT_WIDTH', '32rem'),
@@ -103,7 +103,7 @@ return [
     | Can be in px or %.
     | The default padding is 1.25rem.
     | This is for the all Modal windows.
-    | for particular modal just use the padding() helper method.
+    | for particular modal just use the padding() Helper method.
     */
 
     'padding' => env('SWEET_ALERT_PADDING', '1.25rem'),
@@ -126,7 +126,7 @@ return [
     |--------------------------------------------------------------------------
     | Custom animation with [Animate.css](https://daneden.github.io/animate.css/)
     | If set to false, modal CSS animation will be use default ones.
-    | For specific modal just use the animation() helper method.
+    | For specific modal just use the animation() Helper method.
     |
     */
 
@@ -143,7 +143,7 @@ return [
     | If set to false, a "Confirm"-button will not be shown.
     | It can be useful when you're using custom HTML description.
     | This is for the all Modal windows.
-    | For specific modal just use the showConfirmButton() helper method.
+    | For specific modal just use the showConfirmButton() Helper method.
     |
     */
 
@@ -156,7 +156,7 @@ return [
     | If set to true, a "Close"-button will be shown,
     | which the user can click on to dismiss the modal.
     | This is for the all Modal windows.
-    | For specific modal just use the showCloseButton() helper method.
+    | For specific modal just use the showCloseButton() Helper method.
     |
     */
 
@@ -170,7 +170,7 @@ return [
     | The texts translations will be handled by Laravel at runtime.
     | This is for the all Modal windows.
     | For specific modal just use the confirmButtonText() and
-    | cancelButtonText() helper methods.
+    | cancelButtonText() Helper methods.
     */
 
     'button_text' => [
@@ -185,7 +185,7 @@ return [
     | Modal window or toast position, can be 'top',
     | 'top-start', 'top-end', 'center', 'center-start',
     | 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.
-    | For specific modal just use the position() helper method.
+    | For specific modal just use the position() Helper method.
     |
     */
 

@@ -3783,7 +3783,7 @@ window.CodeMirror = (function() {
 
   // STRING STREAM
 
-  // Fed to the mode parsers, provides helper functions to make
+  // Fed to the mode parsers, provides Helper functions to make
   // parsers more succinct.
 
   // The character stream used by a mode's parser.

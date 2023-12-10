@@ -25,7 +25,7 @@
     <link href="{{asset('back_office/css/waves-effect.css')}}" rel="stylesheet">
 
     <!-- Custom Files -->
-    <link href="{{asset('back_office/css/helper.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('back_office/css/Helper.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('back_office/css/style.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

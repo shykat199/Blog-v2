@@ -5,7 +5,9 @@ namespace App\Http\Controllers\back_office;
 use App\Http\Controllers\Controller;
 use App\Models\admin\PostCategory;
 use App\View\Components\CategoryComponent;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostCategoryController extends Controller
 {
@@ -17,12 +19,6 @@ class PostCategoryController extends Controller
         return view('back_office.post_category.index', compact('allCategories'));
     }
 
-    public function create()
-    {
-        $data['allCategories'] = PostCategory::whereRaw("parent_id = 0")->get();
-        return view('back_office.post_category.create', $data);
-    }
-
     public function store(Request $request)
     {
 
@@ -32,9 +28,17 @@ class PostCategoryController extends Controller
 
         if ($validated) {
 
+            $filename = null;
+
+            if ($request->file('categoryImage')) {
+                $fileName = Uuid::uuid() . '.' . 'category' . '.' . $request->file('categoryImage')->getClientOriginalExtension();
+                $file = Storage::put('/public/images/category/' . $fileName, file_get_contents($request->file('categoryImage')));
+            }
+
             $storeCategory = PostCategory::create([
                 'parent_id' => $request->post('category_id') != null && !empty($request->post('category_id')) ? $request->post('category_id') : 0,
                 'name' => $request->post('name') != null && !empty($request->post('name')) ? $request->post('name') : '',
+                'image' => $filename,
                 'slug' => $request->post('categorySlug') != null && !empty($request->post('categorySlug')) ? $request->post('categorySlug') : '',
             ]);
 
@@ -53,6 +57,11 @@ class PostCategoryController extends Controller
         }
     }
 
+    public function create()
+    {
+        $data['allCategories'] = PostCategory::whereRaw("parent_id = 0")->get();
+        return view('back_office.post_category.create', $data);
+    }
 
     public function edit($slug)
     {
@@ -79,8 +88,20 @@ class PostCategoryController extends Controller
         $updateCategory = PostCategory::find($slug);
 
         if ($updateCategory->parent_id == 0) {
+
+            $fileName = null;
+
+            if ($request->file('categoryImage')) {
+
+                if ($updateCategory->image) {
+                    $dltVideo = Storage::delete('public/images/category/' . $updateCategory->image);
+                }
+                $fileName = Uuid::uuid() . '.' . 'category' . '.' . $request->file('categoryImage')->getClientOriginalExtension();
+                $file = Storage::put('/public/images/category/' . $fileName, file_get_contents($request->file('categoryImage')));
+            }
             $updateCategory = $updateCategory->update([
                 'name' => $request->post('name') != null && !empty($request->post('name')) ? $request->post('name') : '',
+                'image' => $fileName,
                 'slug' => $request->post('categorySlug') != null && !empty($request->post('categorySlug')) ? $request->post('categorySlug') : '',
             ]);
             if ($updateCategory) {
@@ -90,9 +111,21 @@ class PostCategoryController extends Controller
                 toast('Something wrong try again.', 'error');
                 return redirect()->back();
             }
-        } else {
+        }
+        else {
+            $fileName = null;
+            if ($request->file('categoryImage')) {
+
+                if ($updateCategory->image) {
+                    $dltVideo = Storage::delete('public/images/category/' . $updateCategory->image);
+                }
+                $fileName = Uuid::uuid() . '.' . 'category' . '.' . $request->file('categoryImage')->getClientOriginalExtension();
+                $file = Storage::put('/public/images/category/' . $fileName, file_get_contents($request->file('categoryImage')));
+            }
+
             $updateCategory = $updateCategory->update([
                 'name' => $request->post('name') != null && !empty($request->post('name')) ? $request->post('name') : '',
+                'image' => $fileName,
                 'slug' => $request->post('categorySlug') != null && !empty($request->post('categorySlug')) ? $request->post('categorySlug') : '',
             ]);
             if ($updateCategory) {

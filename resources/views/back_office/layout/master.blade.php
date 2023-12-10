@@ -26,7 +26,7 @@
     <link href="{{asset('back_office/assets/sweet-alert/sweet-alert.min.css')}}" rel="stylesheet">
 
 
-    <link href="{{asset('back_office/css/helper.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('back_office/css/Helper.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('back_office/css/style.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="

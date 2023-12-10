@@ -1,9 +1,9 @@
 @push('admin.style')
     <link href="{{asset('back_office/assets/select2/select2.css')}}" rel="stylesheet" type="text/css"/>
-{{--    <link href="{{asset('back_office/css/dropify.css')}}" rel="stylesheet" type="text/css"/>--}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-              integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    {{--    <link href="{{asset('back_office/css/dropify.css')}}" rel="stylesheet" type="text/css"/>--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+          integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 @endpush
 
 <form action="{{isset($posts)?route('update-post',$posts->post_url):route('store-post')}}" method="post"
@@ -95,7 +95,8 @@
             <div class="panel-body">
                 <div class="form-group">
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox3" name="is_featured" type="checkbox" {{isset($posts) && $posts->is_featured == 1?'checked':''}}>
+                        <input id="checkbox3" name="is_featured"
+                               type="checkbox" {{isset($posts) && $posts->is_featured == 1?'checked':''}}>
                         <label for="checkbox3">
                             Is Featured Post
                         </label>

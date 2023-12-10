@@ -5,7 +5,7 @@
             <div class="panel-body">
 
                 <form class="form-horizontal" method="post" role="form"
-                      action="{{isset($post) && !empty($post) ? route('update-category',$post->id) : route('store-category') }}">
+                      action="{{isset($post) && !empty($post) ? route('update-category',$post->id) : route('store-category') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Select Category</label>
@@ -55,6 +55,17 @@
                                    placeholder="Category slug..." readonly>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Featured Image</label>
+                        <div class="col-md-10">
+                            <input type="file" name="categoryImage" class="dropify" data-height="160"
+                                   data-default-file="{{ isset($post)? asset('storage/images/category/'.$post->image):''}}"
+                                   data-allowed-file-extensions="jpeg png jpg" data-max-file-size-preview="3M"/>
+
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div style="float: inline-end">
                             <button type="submit" class="btn btn-info waves-effect waves-light m-b-5">
@@ -63,6 +74,7 @@
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->
@@ -71,11 +83,11 @@
 <script>
     function convertToSlug(str) {
 
-        //replace all special characters | symbols with a space
+//replace all special characters | symbols with a space
         str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ').toLowerCase();
-        // trim spaces at start and end of string
+// trim spaces at start and end of string
         str = str.replace(/^\s+|\s+$/gm, '');
-        // replace space with dash/hyphen
+// replace space with dash/hyphen
         str = str.replace(/\s+/g, '-');
         document.getElementById("categorySlug").value = str;
 
