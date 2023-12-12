@@ -22,6 +22,13 @@ class HomeController extends Controller
             ->where('status','=','Active')
             ->inRandomOrder()->limit(3)->get();
 
+        $data['randomFeature'] = Post::with(['category'=>function($q) {
+            $q->selectRaw('name,slug,id');
+        }])->selectRaw('title,featured_image,created_at,cat_id')
+            ->where('status','=','Active')
+            ->where('is_featured','=',1)
+            ->inRandomOrder()->limit(6)->get();
+
         return view('frontend.layout.master',$data);
     }
 }
