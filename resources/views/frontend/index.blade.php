@@ -6,7 +6,6 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
             <h3 class="m-0">Featured</h3>
-            <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
         </div>
         <div class="owl-carousel owl-carousel-2 carousel-item-4 position-relative">
             @forelse($randomFeature as $key =>$news)
@@ -16,13 +15,12 @@
                          style="object-fit: cover;">
                     <div class="overlay">
                         <div class="mb-1" style="font-size: 13px;">
-                            <a class="text-white" href="">{{$news->category->name}}</a>
+                            <a class="text-white" href="{{route('category-details',$news->category->slug)}}">{{$news->category->name}}</a>
                             <span class="px-1 text-white">/</span>
-                            <a class="text-white"
-                               href="">{{\Carbon\Carbon::parse($news->created_at)->format('F d,Y')}}</a>
+                            <span class="text-white">{{\Carbon\Carbon::parse($news->created_at)->format('F d,Y')}}</span>
                         </div>
                         <a class="h4 m-0 text-white"
-                           href="">{{\Illuminate\Support\Str::limit($news->title,24,'...')}}</a>
+                           href="{{route('news-details',$news->post_url)}}">{{\Illuminate\Support\Str::limit($news->title,24,'...')}}</a>
                     </div>
                 </div>
 
@@ -42,40 +40,24 @@
                 <div class="bg-light py-2 px-4 mb-3">
                     <h3 class="m-0">Business</h3>
                 </div>
+
                 <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-1.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
+                    @forelse(getCategoryData('business',4) as $news)
+                        <div class="position-relative">
+                            <img class="hello img-fluid w-100" src="{{asset('storage/images/post/'.$news->featured_image)}}" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="{{route('category-details',$news->category->slug)}}">{{$news->category->name}}</a>
+                                    <span class="px-1">/</span>
+                                    <span>{{\Carbon\Carbon::parse($news->created_at)->format('Y d, y')}}</span>
+                                </div>
+                                <a class="h4 m-0" href="">{{\Illuminate\Support\Str::limit($news->title,26,'...')}}</a>
                             </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
                         </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-2.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-3.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-danger">No Data Fount</p>
+                    @endforelse
+
                 </div>
             </div>
             <div class="col-lg-6 py-3">
@@ -83,39 +65,23 @@
                     <h3 class="m-0">Technology</h3>
                 </div>
                 <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-4.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
+                    @forelse(getCategoryData('technology',4) as $news)
+
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="{{asset('storage/images/post/'.$news->featured_image)}}" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="{{route('category-details',$news->category->slug)}}">{{$news->category->name}}</a>
+                                    <span class="px-1">/</span>
+                                    <span>{{\Carbon\Carbon::parse($news->created_at)->format('Y d, y')}}</span>
+                                </div>
+                                <a class="h4 m-0" href="">{{\Illuminate\Support\Str::limit($news->title,26,'...')}}</a>
                             </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
                         </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-5.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-6.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-danger">No Data Found</p>
+                    @endforelse
+
                 </div>
             </div>
         </div>
@@ -130,39 +96,22 @@
                     <h3 class="m-0">Entertainment</h3>
                 </div>
                 <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-6.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
+                    @forelse(getCategoryData('entertainment',4) as $news)
+
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="{{asset('storage/images/post/'.$news->featured_image)}}" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="{{route('category-details',$news->category->slug)}}">{{$news->category->name}}</a>
+                                    <span class="px-1">/</span>
+                                    <span>{{\Carbon\Carbon::parse($news->created_at)->format('Y d, y')}}</span>
+                                </div>
+                                <a class="h4 m-0" href="">{{\Illuminate\Support\Str::limit($news->title,26,'...')}}</a>
                             </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
                         </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-5.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-4.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-danger">No Data Found</p>
+                    @endforelse
                 </div>
             </div>
             <div class="col-lg-6 py-3">
@@ -170,39 +119,21 @@
                     <h3 class="m-0">Sports</h3>
                 </div>
                 <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-3.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
+                    @forelse(getCategoryData('sports',4) as $news)
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="{{asset('storage/images/post/'.$news->featured_image)}}" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="{{route('category-details',$news->category->slug)}}">{{$news->category->name}}</a>
+                                    <span class="px-1">/</span>
+                                    <span>{{\Carbon\Carbon::parse($news->created_at)->format('Y d, y')}}</span>
+                                </div>
+                                <a class="h4 m-0" href="">{{\Illuminate\Support\Str::limit($news->title,25,'...')}}</a>
                             </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
                         </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-2.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
-                    <div class="position-relative">
-                        <img class="img-fluid w-100" src="img/news-500x280-1.jpg" style="object-fit: cover;">
-                        <div class="overlay position-relative bg-light">
-                            <div class="mb-2" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h4 m-0" href="">Sanctus amet sed ipsum lorem</a>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-danger">No Data Fount</p>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -217,177 +148,179 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                             <h3 class="m-0">Popular</h3>
-                            <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
                         </div>
                     </div>
+
+                    @php
+                        $getPopularPosts = popularPosts(6,10)
+                    @endphp
+
                     <div class="col-lg-6">
-                        <div class="position-relative mb-3">
-                            <img class="img-fluid w-100" src="img/news-500x280-2.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 14px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+
+                        @if(isset($getPopularPosts[0]) && !empty($getPopularPosts))
+                            <div class="position-relative mb-3">
+                                <img class="img-fluid w-100"
+                                     src="{{asset('storage/images/post/'.$getPopularPosts[0]->featured_image)}}"
+                                     style="object-fit: cover;">
+                                <div class="overlay position-relative bg-light">
+                                    <div class="mb-2" style="font-size: 14px;">
+                                        <a href="{{$getPopularPosts[0]->category->slug}}">{{$getPopularPosts[0]->category->name}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{\Carbon\Carbon::parse($getPopularPosts[0]->created_at)->format('F d,Y')}}</span>
+                                    </div>
+                                    <a class="h4"
+                                       href="">{{\Illuminate\Support\Str::limit($getPopularPosts[0]->title,45,'...')}}</a>
+                                    <p class="m-0">{!! \Illuminate\Support\Str::limit($getPopularPosts[0]->description,100,'...') !!}</p>
                                 </div>
-                                <a class="h4" href="">Est stet amet ipsum stet clita rebum duo</a>
-                                <p class="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at
-                                    justo, lorem amet vero eos sed sit...</p>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @endif
+                        @for($i = 2 ; $i <= 3 ; $i ++)
+                            @if(isset($getPopularPosts[$i]) && !empty($getPopularPosts[$i]))
+                                <div class="d-flex mb-3">
+                                    <img src="{{asset('storage/images/post/'.$getPopularPosts[$i]->featured_image)}}"
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                         style="height: 100px;">
+                                        <div class="mb-1" style="font-size: 13px;">
+                                            <a href="{{route('category-details',$getPopularPosts[$i]->category->slug)}}">{{$getPopularPosts[$i]->category->name}}</a>
+                                            <span class="px-1">/</span>
+                                            <span>{{\Carbon\Carbon::parse($getPopularPosts[$i]->created_at)->format('Y d, y')}}</span>
+                                        </div>
+                                        <a class="h6 m-0"
+                                           href="">{{\Illuminate\Support\Str::limit($getPopularPosts[$i]->title,55,'...')}}</a>
+                                    </div>
                                 </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-2.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
-                                </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
+                            @endif
+                        @endfor
                     </div>
                     <div class="col-lg-6">
-                        <div class="position-relative mb-3">
-                            <img class="img-fluid w-100" src="img/news-500x280-3.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 14px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @if(isset($getPopularPosts[1]) && !empty($getPopularPosts))
+                            <div class="position-relative mb-3">
+                                <img class="img-fluid w-100"
+                                     src="{{asset('storage/images/post/'.$getPopularPosts[1]->featured_image)}}"
+                                     style="object-fit: cover;">
+                                <div class="overlay position-relative bg-light">
+                                    <div class="mb-2" style="font-size: 14px;">
+                                        <a href="{{route('category-details',$getPopularPosts[1]->category->slug)}}">{{$getPopularPosts[1]->category->name}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{\Carbon\Carbon::parse($getPopularPosts[1]->created_at)->format('F d,Y')}}</span>
+                                    </div>
+                                    <a class="h4"
+                                       href="">{{\Illuminate\Support\Str::limit($getPopularPosts[1]->title,45,'...')}}</a>
+                                    <p class="m-0">{!! \Illuminate\Support\Str::limit($getPopularPosts[1]->description,100,'...') !!}</p>
                                 </div>
-                                <a class="h4" href="">Est stet amet ipsum stet clita rebum duo</a>
-                                <p class="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at
-                                    justo, lorem amet vero eos sed sit...</p>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-3.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @endif
+                        @for($i = 4 ; $i <= 5 ; $i ++)
+                            @if(isset($getPopularPosts[$i]) && !empty($getPopularPosts[$i]))
+                                <div class="d-flex mb-3">
+                                    <img src="{{asset('storage/images/post/'.$getPopularPosts[$i]->featured_image)}}"
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                         style="height: 100px;">
+                                        <div class="mb-1" style="font-size: 13px;">
+                                            <a href="{{route('category-details',$getPopularPosts[$i]->category->slug)}}">{{$getPopularPosts[$i]->category->name}}</a>
+                                            <span class="px-1">/</span>
+                                            <span>{{\Carbon\Carbon::parse($getPopularPosts[$i]->created_at)->format('Y d, y')}}</span>
+                                        </div>
+                                        <a class="h6 m-0"
+                                           href="">{{\Illuminate\Support\Str::limit($getPopularPosts[$i]->title,55,'...')}}</a>
+                                    </div>
                                 </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-4.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
-                                </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
+                            @endif
+                        @endfor
                     </div>
                 </div>
 
                 <div class="mb-3 pb-3">
-                    <a href=""><img class="img-fluid w-100" src="img/ads-700x70.jpg" alt=""></a>
+                    <a href=""><img class="img-fluid w-100" src="{{asset('frontend/img/ads-700x70.jpg')}}" alt=""></a>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                             <h3 class="m-0">Latest</h3>
-                            <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
                         </div>
                     </div>
+
+                    @php
+                        $getLatestPosts = getLatestPost(6);
+                    @endphp
+
                     <div class="col-lg-6">
-                        <div class="position-relative mb-3">
-                            <img class="img-fluid w-100" src="img/news-500x280-5.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 14px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @if(isset($getLatestPosts[0]))
+                            <div class="position-relative mb-3">
+                                <img class="img-fluid w-100"
+                                     src="{{asset('storage/images/post/'.$getLatestPosts[0]->featured_image)}}"
+                                     style="object-fit: cover;">
+                                <div class="overlay position-relative bg-light">
+                                    <div class="mb-2" style="font-size: 14px;">
+                                        <a href="{{route('category-details',$getLatestPosts[0]->category->slug)}}">{{$getLatestPosts[0]->category->name}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{\Carbon\Carbon::parse($getLatestPosts[0]->created_at)->format('F d,Y')}}</span>
+                                    </div>
+                                    <a class="h4"
+                                       href="">{{\Illuminate\Support\Str::limit($getLatestPosts[0]->title,32,'...')}}</a>
+                                    <p class="m-0">{{strip_tags(\Illuminate\Support\Str::limit($getLatestPosts[0]->description,100,'...'))}}</p>
                                 </div>
-                                <a class="h4" href="">Est stet amet ipsum stet clita rebum duo</a>
-                                <p class="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at
-                                    justo, lorem amet vero eos sed sit...</p>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-5.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @endif
+                        @for($i = 2 ; $i <= 3 ; $i ++)
+                            @if(isset($getLatestPosts[$i]) && !empty($getLatestPosts[$i]))
+                                <div class="d-flex mb-3">
+                                    <img src="{{asset('storage/images/post/'.$getLatestPosts[$i]->featured_image)}}"
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                         style="height: 100px;">
+                                        <div class="mb-1" style="font-size: 13px;">
+                                            <a href="{{route('category-details',$getLatestPosts[$i]->category->slug)}}">{{$getLatestPosts[$i]->category->name}}</a>
+                                            <span class="px-1">/</span>
+                                            <span>{{\Carbon\Carbon::parse($getLatestPosts[$i]->created_at)->format('Y d, y')}}</span>
+                                        </div>
+                                        <a class="h6 m-0"
+                                           href="">{{\Illuminate\Support\Str::limit($getLatestPosts[$i]->title,60,'...')}}</a>
+                                    </div>
                                 </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-1.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
-                                </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
+                            @endif
+                        @endfor
+
                     </div>
                     <div class="col-lg-6">
-                        <div class="position-relative mb-3">
-                            <img class="img-fluid w-100" src="img/news-500x280-6.jpg" style="object-fit: cover;">
-                            <div class="overlay position-relative bg-light">
-                                <div class="mb-2" style="font-size: 14px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @if(isset($getLatestPosts[1]))
+                            <div class="position-relative mb-3">
+                                <img class="img-fluid w-100"
+                                     src="{{asset('storage/images/post/'.$getLatestPosts[1]->featured_image)}}"
+                                     style="object-fit: cover;">
+                                <div class="overlay position-relative bg-light">
+                                    <div class="mb-2" style="font-size: 14px;">
+                                        <a href="{{route('category-details',$getLatestPosts[1]->category->slug)}}">{{$getLatestPosts[1]->category->name}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{\Carbon\Carbon::parse($getLatestPosts[1]->created_at)->format('F d,Y')}}</span>
+                                    </div>
+                                    <a class="h4"
+                                       href="">{{\Illuminate\Support\Str::limit($getLatestPosts[1]->title,32,'...')}}</a>
+                                    <p class="m-0">{{strip_tags(\Illuminate\Support\Str::limit($getLatestPosts[1]->description,100,'...'))}}</p>
                                 </div>
-                                <a class="h4" href="">Est stet amet ipsum stet clita rebum duo</a>
-                                <p class="m-0">Rebum dolore duo et vero ipsum clita, est ea sed duo diam ipsum, clita at
-                                    justo, lorem amet vero eos sed sit...</p>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-2.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
+                        @endif
+                        @for($i = 4 ; $i <= 5 ; $i ++)
+                            @if(isset($getLatestPosts[$i]) && !empty($getLatestPosts[$i]))
+                                <div class="d-flex mb-3">
+                                    <img src="{{asset('storage/images/post/'.$getLatestPosts[$i]->featured_image)}}"
+                                         style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                         style="height: 100px;">
+                                        <div class="mb-1" style="font-size: 13px;">
+                                            <a href="{{route('category-details',$getLatestPosts[$i]->category->slug)}}">{{$getLatestPosts[$i]->category->name}}</a>
+                                            <span class="px-1">/</span>
+                                            <span>{{\Carbon\Carbon::parse($getLatestPosts[$i]->created_at)->format('Y d, y')}}</span>
+                                        </div>
+                                        <a class="h6 m-0"
+                                           href="">{{\Illuminate\Support\Str::limit($getLatestPosts[$i]->title,60,'...')}}</a>
+                                    </div>
                                 </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <img src="img/news-100x100-3.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                                 style="height: 100px;">
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="">Technology</a>
-                                    <span class="px-1">/</span>
-                                    <span>January 01, 2045</span>
-                                </div>
-                                <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                            </div>
-                        </div>
+                            @endif
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -451,98 +384,17 @@
 
                 <!-- Ads Start -->
                 <div class="mb-3 pb-3">
-                    <a href=""><img class="img-fluid" src="img/news-500x280-4.jpg" alt=""></a>
+                    <a href=""><img class="img-fluid w-100" src="{{asset('frontend/img/ads-700x70.jpg')}}" alt=""></a>
+
                 </div>
                 <!-- Ads End -->
 
                 <!-- Popular News Start -->
-                <div class="pb-3">
-                    <div class="bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Tranding</h3>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img src="img/news-100x100-1.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                        <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                             style="height: 100px;">
-                            <div class="mb-1" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img src="img/news-100x100-2.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                        <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                             style="height: 100px;">
-                            <div class="mb-1" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img src="img/news-100x100-3.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                        <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                             style="height: 100px;">
-                            <div class="mb-1" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img src="img/news-100x100-4.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                        <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                             style="height: 100px;">
-                            <div class="mb-1" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img src="img/news-100x100-5.jpg" style="width: 100px; height: 100px; object-fit: cover;">
-                        <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                             style="height: 100px;">
-                            <div class="mb-1" style="font-size: 13px;">
-                                <a href="">Technology</a>
-                                <span class="px-1">/</span>
-                                <span>January 01, 2045</span>
-                            </div>
-                            <a class="h6 m-0" href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                        </div>
-                    </div>
-                </div>
+                @include('frontend.trending')
                 <!-- Popular News End -->
 
                 <!-- Tags Start -->
-                <div class="pb-3">
-                    <div class="bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Tags</h3>
-                    </div>
-                    <div class="d-flex flex-wrap m-n1">
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Entertainment</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
-                    </div>
-                </div>
+              @include('frontend.tag')
                 <!-- Tags End -->
             </div>
         </div>

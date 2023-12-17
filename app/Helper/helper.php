@@ -24,8 +24,11 @@ function getAllCategory($limit = 0, $order = 'asc')
 
 function getLatestPost($limit = 0)
 {
-    $latestPosts = Post::select('title', 'featured_image')
-        ->where('status', 'Active');
+    $latestPosts = Post::with(['category' => function ($select) {
+        $select->select('name', 'slug', 'id');
+    }])->selectRaw('title,featured_image,description,created_at,post_url,cat_id')
+        ->where('status', 'Active')
+        ->orderBy('id', 'DESC');
     if ($limit != 0) {
         $latestPosts = $latestPosts->inRandomOrder()->limit($limit);
     }
@@ -34,12 +37,49 @@ function getLatestPost($limit = 0)
 
 function trendingPosts($limit = 0, $id = 0, $days = 7)
 {
-    $getPosts = Post::select('title')
+    $getPosts = Post::with(['category' => function ($select) {
+        $select->selectRaw('id,name,slug');
+    }])->selectRaw('title,featured_image,description,cat_id,created_at,post_url,cat_id')
         ->where('status', '=', 'Active')
-        ->where('created_at', '>=', \Carbon\Carbon::now()->subDay($days)->format('Y-m-d H:i'));
+        ->where('created_at', '>=', \Carbon\Carbon::now()->subDay($days)->format('Y-m-d H:i:s'));
     if ($limit != 0) {
         $getPosts = $getPosts->limit($limit);
     }
-    $getPosts = $getPosts->orderBy('hit_count', 'Desc')->get();
-    return $getPosts;
+    return $getPosts->orderBy('hit_count', 'Desc')->get();
+}
+
+function popularPosts($limit = 0, $days = 1)
+{
+    $popularPosts = Post::with(['category' => function ($select) {
+        $select->selectRaw('name,slug,id');
+    }])->selectRaw('title,description,post_url,featured_image,created_at,cat_id')
+        ->where('status', '=', 'Active')
+        ->where('created_at', '>=', \Carbon\Carbon::now()->subDay($days)->format('Y-m-d H:i:s'))
+        ->orderBy('hit_count', 'DESC')
+        ->limit($limit)
+        ->get();
+
+    return $popularPosts;
+}
+
+function getCategoryData($category = null, $limit = 0)
+{
+
+    $getCategoryData = Post::with(['category'=>function($select){
+        $select->select('name','slug','id');
+    }])->selectRaw('title,featured_image,created_at,cat_id,post_url')
+        ->where('status', '=', 'Active');
+    if ($category == 'business') {
+        $getCategoryData = $getCategoryData->where('cat_id', '=', 4);
+    } elseif ($category == 'technology') {
+        $getCategoryData = $getCategoryData->where('cat_id', '=', 2);
+    } elseif ($category == 'news') {
+        $getCategoryData = $getCategoryData->where('cat_id', '=', 5);
+    } elseif ($category == 'entertainment') {
+        $getCategoryData = $getCategoryData->where('cat_id', '=', 3);
+    } else {
+        $getCategoryData = $getCategoryData->where('cat_id', '=', 1);
+    }
+    return $getCategoryData->orderBy('id','DESC')->limit($limit)->get();
+
 }

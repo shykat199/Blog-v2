@@ -22,7 +22,7 @@ class Post extends Model
         return $this->hasOne(PostCategory::class,'id','cat_id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tag::class,'post_tags','post_id','tag_id');
     }

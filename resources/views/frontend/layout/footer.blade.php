@@ -18,7 +18,7 @@
             <h4 class="font-weight-bold mb-4">Categories</h4>
             <div class="d-flex flex-wrap m-n1">
                 @forelse(getAllCategory() as $category)
-                    <a href="" class="btn btn-sm btn-outline-secondary m-1">{{$category->name}}</a>
+                    <a href="{{route('category-details',$category->slug)}}" class="btn btn-sm btn-outline-secondary m-1">{{$category->name}}</a>
                 @empty
                     <p class="text-danger">No Data Found</p>
                 @endforelse
@@ -29,7 +29,7 @@
             <div class="d-flex flex-wrap m-n1">
 
                 @forelse(getAllTags(10,'desc') as $tag)
-                    <a href="" class="btn btn-sm btn-outline-secondary m-1">{{$tag->tag_name}}</a>
+                    <a href="{{route('tag-details',$tag->tag_slug)}}" class="btn btn-sm btn-outline-secondary m-1">{{$tag->tag_name}}</a>
                 @empty
                     <p class="text-danger">No Data Found</p>
                 @endforelse
@@ -39,9 +39,7 @@
             <h4 class="font-weight-bold mb-4">Quick Links</h4>
             <div class="d-flex flex-column justify-content-start">
                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>About</a>
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Advertise</a>
                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy</a>
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Terms & conditions</a>
                 <a class="text-secondary" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
             </div>
         </div>
