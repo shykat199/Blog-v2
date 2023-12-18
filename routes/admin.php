@@ -10,6 +10,7 @@ use App\Http\Controllers\back_office\PostController;
 use App\Http\Controllers\back_office\PostCategoryController;
 use App\Http\Controllers\back_office\TagController;
 use App\Http\Controllers\back_office\UserController;
+use App\Http\Controllers\back_office\ContactController;
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -76,6 +77,14 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/update-tag/{id}', 'update')->name('update-tag');
             Route::get('/delete-tag', 'delete')->name('delete-tag');
         });
+
+        Route::controller(ContactController::class)->group(function () {
+
+            Route::get('/show-message', 'index')->name('show-message');
+            Route::get('/show-message-details/{id}', 'show')->name('show-message-details');
+            Route::get('/delete-message', 'delete')->name('delete-message');
+        });
+
     });
 
 

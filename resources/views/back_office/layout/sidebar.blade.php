@@ -51,6 +51,15 @@
                         <li><a href="{{route('show-permission')}}">Permissions</a></li>
                     </ul>
                 </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="ion-email"></i><span> Messages </span><span
+                            class="pull-right">
+                            <i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{route('show-message')}}">All Messages</a></li>
+
+                    </ul>
+                </li>
                 @endhasanyrole
                 <li class="has_sub">
                     <a href="#" class="waves-effect"><i class="fa fa-newspaper-o"></i><span> News </span><span

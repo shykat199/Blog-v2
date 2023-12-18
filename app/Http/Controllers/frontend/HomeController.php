@@ -7,6 +7,7 @@ use App\Models\admin\PostCategory;
 use App\Models\back_office\Post;
 use Illuminate\Http\Request;
 use App\Models\admin\PostComment;
+use App\Models\admin\Contact;
 
 class HomeController extends Controller
 {
@@ -88,6 +89,22 @@ class HomeController extends Controller
         } else {
             toast('Kindly log in first.', 'error');
             return redirect()->route('news-details', $getPostSlug->post_url);
+        }
+
+    }
+
+    public function postMessage(Request $request)
+    {
+        $sendMessage = Contact::create([
+            'name'=>$request->post('name'),
+            'email'=>$request->post('email'),
+            'subject'=>$request->post('subject'),
+            'message'=>$request->post('message'),
+        ]);
+
+        if ($sendMessage){
+            toast('Message Send Successfully','success');
+            return redirect()->back();
         }
 
     }
