@@ -34,7 +34,7 @@
                     <!-- News Detail End -->
 
                     <!-- Comment List Start -->
-                   @include('frontend.post-comment')
+                   @include('frontend.post-comment',['post_id'=>$postDetails->id])
                     <!-- Comment List End -->
 
                 </div>

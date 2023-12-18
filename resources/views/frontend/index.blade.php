@@ -170,7 +170,7 @@
                                     </div>
                                     <a class="h4"
                                        href="">{{\Illuminate\Support\Str::limit($getPopularPosts[0]->title,45,'...')}}</a>
-                                    <p class="m-0">{!! \Illuminate\Support\Str::limit($getPopularPosts[0]->description,100,'...') !!}</p>
+                                    <p class="m-0">{{strip_tags(\Illuminate\Support\Str::limit($getPopularPosts[0]->description,100,'...'))}}</p>
                                 </div>
                             </div>
                         @endif
@@ -207,7 +207,7 @@
                                     </div>
                                     <a class="h4"
                                        href="">{{\Illuminate\Support\Str::limit($getPopularPosts[1]->title,45,'...')}}</a>
-                                    <p class="m-0">{!! \Illuminate\Support\Str::limit($getPopularPosts[1]->description,100,'...') !!}</p>
+                                    <p class="m-0">{{strip_tags(\Illuminate\Support\Str::limit($getPopularPosts[1]->description,100,'...'))}}</p>
                                 </div>
                             </div>
                         @endif

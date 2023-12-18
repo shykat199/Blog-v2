@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\PostCategory;
 use App\Models\back_office\Post;
 use Illuminate\Http\Request;
+use App\Models\admin\PostComment;
 
 class HomeController extends Controller
 {
@@ -49,7 +50,7 @@ class HomeController extends Controller
     public function newsDetails($slug)
     {
         $data['postDetails'] = Post::with(['category' => function ($select) {
-            $select->select('name', 'slug','id');
+            $select->select('name', 'slug', 'id');
         }])
             ->selectRaw('posts.id,posts.hit_count,posts.title,posts.description,posts.post_url,posts.featured_image,posts.created_at,posts.cat_id,posts.is_featured')
             ->where('posts.post_url', '=', $slug)
@@ -63,6 +64,31 @@ class HomeController extends Controller
     public function postHitCount($id, $hitCount)
     {
         $updateHitCount = Post::where('id', $id)->update(['hit_count' => \DB::raw($hitCount . ' + 1')]);
+
+    }
+
+    public function postComment(Request $request, $id)
+    {
+        $getPostSlug = Post::find($id)->select('post_url')->first();
+        if (\Auth::check()) {
+            $postComment = PostComment::create([
+                'user_id' => \Auth::user()->id,
+                'post_id' => $id,
+                'comment_id' => 0,
+                'comment' => $request->post('comment'),
+            ]);
+
+            if ($postComment) {
+                toast('Comment has been submitted', 'success');
+                return redirect()->route('news-details', $getPostSlug->post_url);
+            } else {
+                toast('Something wrong try again', 'error');
+                return redirect()->route('news-details', $getPostSlug->post_url);
+            }
+        } else {
+            toast('Kindly log in first.', 'error');
+            return redirect()->route('news-details', $getPostSlug->post_url);
+        }
 
     }
 }

@@ -8,4 +8,5 @@ Route::controller(HomeController::class)->group(function (){
    Route::get('news-details/{slug}','newsDetails')->name('news-details');
    Route::get('category-details/{slug}','categoryDetails')->name('category-details');
    Route::get('tag-details/{slug}','tagDetails')->name('tag-details');
+   Route::post('post-comment/{id}','postComment')->name('post-comment');
 });

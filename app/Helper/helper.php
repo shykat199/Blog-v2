@@ -3,6 +3,7 @@
 use App\Models\admin\Tag;
 use App\Models\admin\PostCategory;
 use App\Models\back_office\Post;
+use App\Models\admin\PostComment;
 
 function getAllTags($limit = 0, $orderBy = 'asc')
 {
@@ -81,5 +82,16 @@ function getCategoryData($category = null, $limit = 0)
         $getCategoryData = $getCategoryData->where('cat_id', '=', 1);
     }
     return $getCategoryData->orderBy('id','DESC')->limit($limit)->get();
+
+}
+
+function getPostComments($postId){
+
+    $getComments = PostComment::selectRaw('post_comments.post_id,post_comments.comment_id,post_comments.comment,post_comments.created_at,users.name,users.user_image')
+        ->join('users','users.id','=','post_comments.user_id')
+        ->where('post_id','=',$postId)
+        ->orderBy('post_comments.id','DESC')
+        ->get();
+    return $getComments;
 
 }
