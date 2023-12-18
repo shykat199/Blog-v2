@@ -17,7 +17,6 @@ class RoleCheck
         foreach ($roles as $role) {
             try {
                 $role = Role::whereName($role)->firstOrFail();
-
                 if (Auth::user()->hasRole($role)) {
                     return $next($request);
                 }

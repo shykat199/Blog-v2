@@ -15,6 +15,12 @@
                         <button class="btn btn-primary waves-effect waves-light m-b-5 btn-create">
                             <span>Create New Post</span>&nbsp;&nbsp;<i
                                 class="fa fa-plus-square"></i></button>
+                        <a href="{{route('show-post')}}" class="btn btn-info btn-custom waves-effect waves-light m-b-5">
+                            <span>Show Active Posts</span>&nbsp;&nbsp;<i class="ion-ios7-paper"></i></a>
+                        <a href="{{route('show-post','pending')}}" class="btn btn-success btn-custom waves-effect waves-light m-b-5">
+                            <span>Show Pending Posts</span>&nbsp;&nbsp;<i class="ion-ios7-paper"></i></a>
+                        <a href="{{route('show-post','inactive')}}" class="btn btn-info btn-custom waves-effect waves-light m-b-5">
+                            <span>Show Inactive Posts</span>&nbsp;&nbsp;<i class="ion-ios7-paper"></i></a>
                     </h3>
                 </div>
                 <div class="panel-body">

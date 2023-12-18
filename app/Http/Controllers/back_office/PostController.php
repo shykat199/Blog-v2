@@ -15,21 +15,77 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index($type = null)
     {
         $data = [];
-        $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
-            ->where('status', '=', 'Active')->get();
-        return view('back_office.post.index', $data);
+        $users = Auth::user();
+
+        if (empty($type)) {
+
+            if ($users->role == 1 || $users->role == 3) {
+
+                $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                    ->where('status', '=', 'Active')->orderBy('id', 'DESC')->get();
+            } else {
+
+                $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                    ->where('status', '=', 'Active')->where('user_id', '=', Auth::user()->id)
+                    ->orderBy('id', 'DESC')->get();
+            }
+            return view('back_office.post.index', $data);
+        }
+        else {
+            if ($type == 'pending') {
+                if ($users->role == 1 || $users->role == 3) {
+
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Pending')->get();
+                } else {
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Pending')->where('user_id', '=', Auth::user()->id)->get();
+                }
+                return view('back_office.post.index', $data);
+            }
+            elseif ($type == 'inactive') {
+                if ($users->role == 1 || $users->role == 3) {
+
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Inactive')->orderBy('id', 'DESC')->get();
+                }
+                else {
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Inactive')
+                        ->where('user_id', '=', Auth::user()->id)
+                        ->orderBy('id', 'DESC')->get();
+                }
+                return view('back_office.post.index', $data);
+            }
+            else{
+                if ($users->role == 1 || $users->role == 3) {
+
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Active')->orderBy('id', 'DESC')->get();
+                }
+                else {
+                    $data['allPosts'] = Post::with(['tags', 'category.subCategory'])
+                        ->where('status', '=', 'Active')
+                        ->where('user_id', '=', Auth::user()->id)
+                        ->orderBy('id', 'DESC')->get();
+                }
+                return view('back_office.post.index', $data);
+            }
+        }
+
+
     }
 
     public function store(Request $request)
     {
-        $checkPost = Post::where('post_url',$request->post('post_url'))->first();
+        $checkPost = Post::where('post_url', $request->post('post_url'))->first();
 
-        if (!empty($checkPost)){
+        if (!empty($checkPost)) {
 
-            toast('Post is already exist wjith same title','error');
+            toast('Post is already exist with same title', 'error');
             return redirect()->back();
         }
 
@@ -46,7 +102,7 @@ class PostController extends Controller
             'description' => $request->post('description') !== null ? $request->post('description') : '',
             'post_url' => $request->post('post_url') !== null ? $request->post('post_url') : '',
             'title' => $request->post('title') !== null ? $request->post('title') : '',
-            'status' => $request->post('status') !== null ? $request->post('status') : 'Pending',
+            'status' => $request->post('status') !== null && (Auth::user()->role == 1 || Auth::user()->role == 3) ? $request->post('status') : 'Pending',
             'featured_image' => $request->file('image') !== null ? $fileName : null,
             'is_featured' => $request->post('is_featured') == 'on' ? 1 : 0,
             'hit_count' => 0,
@@ -85,8 +141,7 @@ class PostController extends Controller
     {
         $data['allCategories'] = PostCategory::where('parent_id', '=', 0)->get();
         $data['postDetails'] = Post::with(['tags', 'category.subCategory'])
-            ->whereRaw('post_url = ?', [$slug])
-            ->where('status', '=', 'Active')->first();
+            ->whereRaw('post_url = ?', [$slug])->first();
 
         return view('back_office.post.edit', $data);
     }
@@ -104,7 +159,7 @@ class PostController extends Controller
 
         if ($getPostDetails) {
             $updatePost = Post::where('post_url', $slug)->first()->update([
-                'user_id' => Auth::user()->id,
+                'user_id' => $getPostDetails->user_id,
                 'sub_cat_id' => $request->post('sub_cat_id') !== null ? $request->post('sub_cat_id') : 0,
                 'cat_id' => $request->post('cat_id') !== null ? $request->post('cat_id') : 0,
                 'description' => $request->post('description') !== null ? $request->post('description') : '',

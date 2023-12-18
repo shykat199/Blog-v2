@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="{{route('dashboard')}}" class="logo"><i class="md md-terrain"></i> <span>Moltran </span></a>
+            <a href="{{route('dashboard')}}" class="logo"><i class="md md-terrain"></i> <span>NewsRoom</span></a>
         </div>
     </div>
     <!-- Button mobile view to collapse sidebar menu -->

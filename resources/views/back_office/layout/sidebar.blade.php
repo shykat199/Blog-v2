@@ -4,7 +4,7 @@
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="pull-left">
-                <img
+                <img height="55" width="55"
                     src="{{ isset(\Illuminate\Support\Facades\Auth::user()->user_image)? asset('storage/images/user/'.\Illuminate\Support\Facades\Auth::user()->user_image):asset('back_office/images/avatar-1.jpg')}}"
                     alt="" class="thumb-md img-circle">
             </div>
@@ -17,7 +17,7 @@
                 <p class="text-muted m-0">
                     @if(\Illuminate\Support\Facades\Auth::user()->role==1)
                         Admin
-                    @elseif(\Illuminate\Support\Facades\Auth::user()->role==2)
+                    @elseif(\Illuminate\Support\Facades\Auth::user()->role==3)
                         Sub Admin
                     @else
                         Users
@@ -28,12 +28,13 @@
         <!--- Divider -->
         <div id="sidebar-menu">
             <ul>
+
                 <li>
-                    <a href="" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
+                    <a href="{{route('dashboard')}}" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
                 </li>
                 @hasanyrole('sub_admin|admin')
                 <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Users </span><span
+                    <a href="#" class="waves-effect"><i class="ion-android-social"></i><span> Users </span><span
                             class="pull-right">
                             <i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
@@ -42,7 +43,7 @@
                     </ul>
                 </li>
                 <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Acl </span><span
+                    <a href="#" class="waves-effect"><i class="ion-navicon-round"></i><span> Acl </span><span
                             class="pull-right">
                             <i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">
@@ -52,7 +53,7 @@
                 </li>
                 @endhasanyrole
                 <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="md md-mail"></i><span> News </span><span
+                    <a href="#" class="waves-effect"><i class="fa fa-newspaper-o"></i><span> News </span><span
                             class="pull-right">
                             <i class="md md-add"></i></span></a>
                     <ul class="list-unstyled">

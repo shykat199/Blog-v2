@@ -73,6 +73,7 @@
                     </select>
 
                 </div>
+                @hasanyrole('admin|sub_admin')
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="select2" name="status" data-placeholder="Choose a Country..." style="width: 100%">
@@ -81,10 +82,11 @@
                         <option value="Pending"{{isset($posts)?($posts->status == 'Pending'?'SELECTED':''):''}}>
                             Pending
                         </option>
-                        <option value="Wait"{{isset($posts)?($posts->status == 'Inactive'?'SELECTED':''):''}}>Inactive
+                        <option value="Inactive"{{isset($posts)?($posts->status == 'Inactive'?'SELECTED':''):''}}>Inactive
                         </option>
                     </select>
                 </div>
+                @endrole
             </div>
 
         </div>

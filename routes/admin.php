@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(PostController::class)->group(function () {
-        Route::get('/show-post', 'index')->name('show-post');
+        Route::get('/show-post/{type?}', 'index')->name('show-post');
         Route::get('/create-post', 'create')->name('create-post');
         Route::post('/store-post', 'store')->name('store-post');
         Route::get('/edit-post/{slug}', 'edit')->name('edit-post');

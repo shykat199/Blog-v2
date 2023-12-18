@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\back_office;
 
 use App\Http\Controllers\Controller;
+use App\Models\back_office\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use Couchbase\Role;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,23 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('back_office.dashboard');
+        $data = [];
+        $users = Auth::user();
+
+        if ($users->role == 1 || $users->role == 3) {
+            $data['users'] = User::all();
+            $data['role'] = \Spatie\Permission\Models\Role::all();
+            $data['approvePosts'] = Post::where('status', '=', 'Active')->get();
+            $data['totalPosts'] = Post::all();
+            $data['pendingPosts'] = Post::where('status', '=', 'Pending')->get();
+            $data['inactivePosts'] = Post::where('status', '=', 'Inactive')->get();
+        } else {
+            $data['approvePosts'] = Post::where('status', '=', 'Active')->where('user_id', '=', Auth::user()->id)->get();
+            $data['pendingPosts'] = Post::where('status', '=', 'Pending')->where('user_id', '=', Auth::user()->id)->get();
+            $data['inactivePosts'] = Post::where('status', '=', 'Inactive')->where('user_id', '=', Auth::user()->id)->get();
+            $data['totalPosts'] = Post::where('user_id', '=', Auth::user()->id)->get();
+        }
+        return view('back_office.dashboard', $data);
     }
 
     public function profile()
